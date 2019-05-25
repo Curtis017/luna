@@ -1,5 +1,5 @@
 {
-  "name": "luna",
+  "name": "@curtis.hughes/luna",
   "version": "1.0.0",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -31,5 +31,28 @@
     "inquirer": "^6.3.1",
     "mime-types": "^2.1.24",
     "node-dir": "^0.1.17"
-  }
+  },
+  "description": "Luna is an opinionated command line tool for deploying single page applications to AWS. It provisions the necessary AWS resources and handles uploading build artifacts to S3.",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Curtis017/luna.git"
+  },
+  "keywords": [
+    "aws",
+    "spa",
+    "react",
+    "vue",
+    "hosting",
+    "deploy",
+    "s3",
+    "cloudfront"
+  ],
+  "author": "Curtis Hughes",
+  "bugs": {
+    "url": "https://github.com/Curtis017/luna/issues"
+  },
+  "homepage": "https://github.com/Curtis017/luna#readme"
 }

@@ -1,0 +1,35 @@
+{
+  "name": "luna",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "luna:deploy": "ts-node src/index.ts deploy",
+    "luna:destroy": "ts-node src/index.ts destroy",
+    "lint": "tslint 'src/**/*.{ts}'",
+    "build": "tsc",
+    "prepare": "yarn lint && yarn build"
+  },
+  "bin": {
+    "luna": "./lib/index.js"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^6.0.1",
+    "@types/joi": "^14.3.2",
+    "@types/mime-types": "^2.1.0",
+    "@types/node": "^11.9.5",
+    "@types/node-dir": "^0.0.33",
+    "ts-node": "^8.0.2",
+    "tslint": "^5.13.0",
+    "typescript": "^3.3.3333"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.441.0",
+    "chalk": "^2.4.2",
+    "commander": "^2.20.0",
+    "inquirer": "^6.3.1",
+    "mime-types": "^2.1.24",
+    "node-dir": "^0.1.17"
+  }
+}

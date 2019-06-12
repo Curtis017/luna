@@ -49,6 +49,8 @@ const updateBucketPolicy = async ({ bucket }: S3Bucket, client: S3, count: numbe
                     await updateBucketPolicy({ bucket }, client, --count);
                     resolve();
                 }, 2000));
+            } else {
+                throw err;
             }
         }
     } else {

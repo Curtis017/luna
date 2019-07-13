@@ -15,7 +15,7 @@
     "luna": "./lib/index.js"
   },
   "devDependencies": {
-    "@types/inquirer": "^6.0.1",
+    "@types/inquirer": "^6.0.3",
     "@types/mime-types": "^2.1.0",
     "@types/node": "^11.9.5",
     "@types/node-dir": "^0.0.33",
@@ -27,7 +27,7 @@
     "aws-sdk": "^2.441.0",
     "chalk": "^2.4.2",
     "commander": "^2.20.0",
-    "inquirer": "^6.3.1",
+    "inquirer": "^6.5.0",
     "mime-types": "^2.1.24",
     "node-dir": "^0.1.17"
   },

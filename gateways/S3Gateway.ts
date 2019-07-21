@@ -5,7 +5,11 @@ import dir from 'node-dir';
 import { S3 } from 'aws-sdk';
 
 export class S3Gateway {
-    constructor(private readonly client: S3 = new S3({ apiVersion: '2010-05-15' })) { }
+    constructor(private readonly client: S3 = new S3({ apiVersion: '2010-05-15' })) {
+        if (!client.config.credentials) {
+            throw new Error('Please configure AWS credentials and default region.');
+        }
+    }
 
     public async uploadDistToS3Bucket(bucketName: string, directory: string, dryRun: boolean) {
         await this.client.waitFor('bucketExists', { Bucket: bucketName }).promise();

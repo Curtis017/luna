@@ -2,7 +2,11 @@ import { CloudFormation } from "aws-sdk";
 import { Template } from "../types";
 
 export class CloudFormationGateway {
-    constructor(private readonly client: CloudFormation = new CloudFormation({ apiVersion: '2010-05-15' })) { }
+    constructor(private readonly client: CloudFormation = new CloudFormation({ apiVersion: '2010-05-15' })) {
+        if (!client.config.credentials) {
+            throw new Error('Please configure AWS credentials and default region.');
+        }
+    }
 
     public async fetchStack(stackName: string): Promise<CloudFormation.Types.Stack | undefined> {
         try {

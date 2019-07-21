@@ -4,12 +4,16 @@ import { Options } from '../types';
 import { CloudFormationGateway } from '../gateways/CloudFormationGateway';
 import { S3Gateway } from '../gateways/S3Gateway';
 import { deleteStackQuestion } from '../questions';
+import { CloudFormation } from 'aws-sdk';
+import * as logger from '../utils/logger';
 
 export const destroy = async (projectName: string, { sync, yes }: Options, cloudFormationGateway: CloudFormationGateway = new CloudFormationGateway(), s3Gateway: S3Gateway = new S3Gateway()) => {    
+    logger.info('Checking for existing stack...');
     const stack = await cloudFormationGateway.fetchStack(projectName);
     if (stack) {
+        logger.info('Deleting stack...');
         const resources = await cloudFormationGateway.describeStackResources(stack);
-        const { deleteStack } = (yes) ? { deleteStack: true } : await inquirer.prompt([deleteStackQuestion(chalk.red(JSON.stringify(resources, null, 2)))]);
+        const { deleteStack } = (yes) ? { deleteStack: true } : await inquirer.prompt([deleteStackQuestion(formatResources(resources))]);
         if (deleteStack) {
             const bucket = resources.find((resource) => resource.ResourceType === 'AWS::S3::Bucket');
             if (bucket && bucket.PhysicalResourceId) {
@@ -17,5 +21,11 @@ export const destroy = async (projectName: string, { sync, yes }: Options, cloud
             }
             await cloudFormationGateway.deleteStack(stack.StackName, sync);
         }
+    } else {
+        logger.info('Existing stack not found...');
     }
+    logger.info('Finished...');
 }
+
+const formatResources = (resources: CloudFormation.StackResource[]): string => resources
+    .reduce((acc, resource) => acc + `${chalk.red(`\n- ${resource.ResourceType}`)}\n  PhysicalResourceId: ${resource.PhysicalResourceId}\n  ResourceStatus: ${resource.ResourceStatus}`, '');

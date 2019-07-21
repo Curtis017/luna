@@ -27,11 +27,3 @@ npx @curtis.hughes/luna destroy <project-name>
 -s, --sync # Synchronously wait for resources to be deployed/destroyed
 -y, --yes  # Automatically reply yes for all prompts.
 ```
-
-### TODO
-* Provide some type of start message for npx
-* Throw error if required aws env variables are not set.
-* Print CloudFormation domain name.
-* use project name from package.json as default. (use env flag for prod vs dev)
-* status check for each resource to make sure it still exists.
-* create minimum policy for deployments
